@@ -2,5 +2,6 @@
   display: flex;
   max-width: 880px;
   min-height: 120px;
-  margin: 0 auto;
+  margin: 0 auto 50px;
+  outline: 1px solid red;
 }

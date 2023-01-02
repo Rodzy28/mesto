@@ -1,9 +1,28 @@
 .profile__avatar {
-  background-image: url(../../../images/avatars/sergei_pradko.jpg);
   width: 168.75px;
   height: 127.5px;
-  background-size: 100%;
-  background-position: center;
+  position: relative;
+  left: -22.5px;
+  display: flex;
+  align-items: center;
+  outline: 1px solid greenyellow;
+  background-image: url(../../../images/avatars/sergei_pradko.jpg);
+  background-size: 80%;
+  background-position: center -16px;
   background-repeat: no-repeat;
+  clip-path: circle();
+}
+
+.profile__avatar::after {
+  content: " ";
+  background-color: #c4c4c4;
+  background-image: url(../../../images/avatars/sergei_pradko.jpg);
+  background-size: 100%;
+  background-position: center -5px;
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
+  margin-left: 22.5px;
 }
