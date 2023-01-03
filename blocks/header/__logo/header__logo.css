@@ -5,5 +5,15 @@
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
+  margin-bottom: 41px;
   z-index: 1;
+}
+
+@media screen and (max-width: 424px) {
+  .header__logo {
+    margin-bottom: 32px;
+    margin-left: 27px;
+    width: 104px;
+    height: 24px;
+  }
 }
