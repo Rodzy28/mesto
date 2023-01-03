@@ -1,0 +1,9 @@
+.place__picture {
+  object-fit: cover;
+  object-position: center;
+  height: 282px;
+  width: 282px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-bottom: 25px;
+}
