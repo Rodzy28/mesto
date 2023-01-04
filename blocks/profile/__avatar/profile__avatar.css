@@ -1,6 +1,6 @@
 .profile__avatar {
-  width: 120px;
-  height: 120px;
+  min-width: 120px;
+  min-height: 120px;
   background-image: url(../../../images/avatars/sergei_pradko.jpg);
   background-size: 100%;
   background-position: center;
@@ -9,7 +9,7 @@
   margin-right: 30px;
 }
 
-@media screen and (max-width: 424px) {
+@media screen and (max-width: 779px) {
   .profile__avatar {
     margin: 0 auto 26px;
   }

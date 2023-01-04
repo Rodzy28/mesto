@@ -2,10 +2,15 @@
   background-image: url(../../../images/button/like_button.svg);
   background-repeat: no-repeat;
   background-size: 100%;
-  width: 22px;
+  min-width: 22px;
   height: 19px;
   border: none;
   align-self: center;
   background-color: #fff;
   padding: 0;
+  transition: opacity .2s;
+}
+
+.place__like-button:hover {
+  opacity: .5;
 }
