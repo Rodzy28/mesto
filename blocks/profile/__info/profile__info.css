@@ -2,5 +2,14 @@
   display: grid;
   gap: 16px 18px;
   grid-template-columns: 1fr 24px;
-  height: fit-content;
+}
+
+@media screen and (max-width: 424px) {
+  .profile__info {
+    margin-bottom: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px 10px;
+  }
 }

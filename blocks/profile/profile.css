@@ -2,3 +2,10 @@
   max-width: 880px;
   margin: 0 auto 50px;
 }
+
+@media screen and (max-width: 424px) {
+  .profile {
+    min-width: 282px;
+    margin: 0 auto 36px;
+  }
+}
