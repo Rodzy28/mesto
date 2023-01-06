@@ -21,22 +21,24 @@
         <li class="profile__avatar"></li>
         <li class="profile__info">
           <h1 class="profile__name">Сергей Прадько</h1>
-          <button class="profile__edit-button"></button>
+          <button class="profile__edit-button cursor"></button>
           <p class="profile__job">Папин бродяга, Мамин симпотяга</p>
         </li>
-        <li class="profile__button"><button class="profile__add-button"></button></li>
+        <li class="profile__button">
+          <button class="profile__add-button cursor"></button>
+        </li>
       </ul>
       <div class="popup">
         <form class="popup__container">
-          <p class="popup__text">Редактировать профиль</p>
+          <h2 class="popup__header">Редактировать профиль</h2>
           <label class="popup__input-label">
-            <input class="popup__input" type="text" placeholder="Введите имя">
+            <input class="popup__input" id="input-name" type="text" placeholder="Введите имя" required>
           </label>
           <label class="popup__input-label">
-            <input class="popup__input" type="text" placeholder="Введите профессию">
+            <input class="popup__input" id="input-job" type="text" placeholder="Введите профессию" required>
           </label>
           <button type="button" class="popup__close-button"></button>
-          <button type="submit" class="popup__save-button">Сохранить</button>
+          <button type="submit" class="popup__save-button cursor">Сохранить</button>
         </form>
       </div>
     </section>

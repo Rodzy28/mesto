@@ -1,6 +1,7 @@
 .footer {
   max-width: 880px;
-  margin: 0 auto 60px;
+  margin: 0 auto;
+  padding-bottom: 60px;
   font-size: 18px;
   line-height: 22px;
   color: #545454;
@@ -10,7 +11,7 @@
   .footer {
     max-width: 581px;
     font-size: 16px;
-    margin-bottom: 48px;
+    padding-bottom: 48px;
   }
 }
 
@@ -18,7 +19,7 @@
   .footer {
     font-size: 14px;
     line-height: 17px;
-    margin-bottom: 36px;
+    padding-bottom: 36px;
     max-width: 282px;
   }
 }
