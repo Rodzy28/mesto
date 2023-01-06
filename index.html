@@ -22,13 +22,21 @@
         <li class="profile__info">
           <h1 class="profile__name">Сергей Прадько</h1>
           <button class="profile__edit-button"></button>
-          <p class="profile__description">Папин бродяга, Мамин симпотяга</p>
+          <p class="profile__job">Папин бродяга, Мамин симпотяга</p>
         </li>
         <li class="profile__button"><button class="profile__add-button"></button></li>
       </ul>
       <div class="popup">
-        <form class="popup__container" action="">
+        <form class="popup__container">
+          <p class="popup__text">Редактировать профиль</p>
+          <label class="popup__input-label">
+            <input class="popup__input" type="text" placeholder="Введите имя">
+          </label>
+          <label class="popup__input-label">
+            <input class="popup__input" type="text" placeholder="Введите профессию">
+          </label>
           <button type="button" class="popup__close-button"></button>
+          <button type="submit" class="popup__save-button">Сохранить</button>
         </form>
       </div>
     </section>
