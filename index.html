@@ -16,32 +16,14 @@
   </header>
   <main>
     <section class="profile">
-      <ul class="profile__list">
-        <li class="profile__avatar"></li>
-        <li class="profile__info">
+      <div class="profile__list">
+        <div class="profile__avatar"></div>
+        <div class="profile__info">
           <h1 class="profile__name">Сергей Прадько</h1>
-          <button class="profile__edit-button cursor" type="button"></button>
+          <button class="profile__edit-button" type="button" aria-label="Открыть окно редактирования профиля"></button>
           <p class="profile__job">Папин бродяга, Мамин симпотяга!</p>
-        </li>
-        <li class="profile__button">
-          <button class="profile__add-button cursor" type="button"></button>
-        </li>
-      </ul>
-      <div class="popup">
-        <div class="popup__container">
-          <h2 class="popup__header">Редактировать профиль</h2>
-          <button type="button" class="popup__close-button"></button>
-          <form>
-            <label class="popup__input-label">
-              <input class="popup__input popup__input_name" type="text" name="name" placeholder="Введите имя" required>
-            </label>
-            <label class="popup__input-label">
-              <input class="popup__input popup__input_job" type="text" name="job" placeholder="Введите профессию"
-                required>
-            </label>
-            <button type="submit" class="popup__save-button cursor">Сохранить</button>
-          </form>
         </div>
+        <button class="profile__add-button" type="button" aria-label="Добавить фотографию"></button>
       </div>
     </section>
     <section class="place">
@@ -49,42 +31,42 @@
         <li class="place__item"><img class="place__picture" src="./images/pictures/sri_lanka.jpg"
             alt="Девятиарочный мост. Шри-Ланка.">
           <div class="place__content">
-            <p class="place__text">Шри-Ланка</p>
+            <h2 class="place__text">Шри-Ланка</h2>
             <button class="place__like-button" type="button"></button>
           </div>
         </li>
         <li class="place__item"><img class="place__picture" src="./images/pictures/cyprus.jpg"
             alt="Мыс Каво Греко. Кипр.">
           <div class="place__content">
-            <p class="place__text">Кипр</p>
+            <h2 class="place__text">Кипр</h2>
             <button class="place__like-button" type="button"></button>
           </div>
         </li>
         <li class="place__item"><img class="place__picture" src="./images/pictures/belev.jpg"
             alt="город Белёв. Тульская область.">
           <div class="place__content">
-            <p class="place__text">Белёв</p>
+            <h2 class="place__text">Белёв</h2>
             <button class="place__like-button" type="button"></button>
           </div>
         </li>
         <li class="place__item"><img class="place__picture" src="./images/pictures/nekrasovka.jpg"
             alt="Собачий приют. г.Москва">
           <div class="place__content">
-            <p class="place__text">Собачий приют - Некрасовка</p>
+            <h2 class="place__text">Собачий приют - Некрасовка</h2>
             <button class="place__like-button" type="button"></button>
           </div>
         </li>
         <li class="place__item"><img class="place__picture" src="./images/pictures/thailand.jpg"
-            alt="Майя Бэй, о. Пхи-Пхи-Ле, Таиланд.">
+            alt="Майя Бэй, о.Пхи-Пхи-Ле, Таиланд.">
           <div class="place__content">
-            <p class="place__text">Тайланд</p>
+            <h2 class="place__text">Тайланд</h2>
             <button class="place__like-button" type="button"></button>
           </div>
         </li>
         <li class="place__item"><img class="place__picture" src="./images/pictures/dubai.jpg"
             alt="«Бурдж-Хали́фа». Дубай">
           <div class="place__content">
-            <p class="place__text">Дубай</p>
+            <h2 class="place__text">Дубай</h2>
             <button class="place__like-button" type="button"></button>
           </div>
         </li>
@@ -94,7 +76,16 @@
   <footer class="footer">
     <p class="footer__text">&copy; 2023 Mesto Russia</p>
   </footer>
-  <script src="./vendor/popup.js"></script>
+  <div class="popup">
+    <form class="popup__container" name="profile" method="post">
+      <h2 class="popup__header">Редактировать профиль</h2>
+      <button type="button" class="popup__close-button" aria-label="Закрыть окно редактирования профиля"></button>
+      <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Введите имя" required>
+      <input class="popup__input popup__input_type_job" type="text" name="job" placeholder="Введите профессию" required>
+      <button type="submit" class="popup__save-button">Сохранить</button>
+    </form>
+  </div>
+  <script src="./scripts/popup.js"></script>
 </body>
 
 </html>

@@ -8,6 +8,10 @@
   width: 358px;
 }
 
+.popup__input:not(:last-of-type) {
+  margin-bottom: 29px;
+}
+
 @media screen and (max-width: 600px) {
   .popup__input {
     width: 238px;

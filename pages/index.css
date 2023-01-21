@@ -16,9 +16,7 @@
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
-@import url(../blocks/popup/__input_name/popup__input_name.css);
 @import url(../blocks/profile/__job/profile__job.css);
-@import url(../blocks/profile/__button/profile__button.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/place/place.css);
 @import url(../blocks/place/__list/place__list.css);
