@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Сергей Прадько">
-  <meta name="description" content="Проектная работа №4 - Место - Сергея Прадько на Яндекс.Практикуме">
+  <meta name="description" content="Проектная работа №4-5 - Место - Сергея Прадько на Яндекс.Практикуме">
   <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
@@ -28,55 +28,22 @@
     </section>
     <section class="place">
       <ul class="place__list">
-        <li class="place__item"><img class="place__picture" src="./images/pictures/sri_lanka.jpg"
-            alt="Девятиарочный мост. Шри-Ланка.">
-          <div class="place__content">
-            <h2 class="place__text">Шри-Ланка</h2>
-            <button class="place__like-button" type="button"></button>
-          </div>
-        </li>
-        <li class="place__item"><img class="place__picture" src="./images/pictures/cyprus.jpg"
-            alt="Мыс Каво Греко. Кипр.">
-          <div class="place__content">
-            <h2 class="place__text">Кипр</h2>
-            <button class="place__like-button" type="button"></button>
-          </div>
-        </li>
-        <li class="place__item"><img class="place__picture" src="./images/pictures/belev.jpg"
-            alt="город Белёв. Тульская область.">
-          <div class="place__content">
-            <h2 class="place__text">Белёв</h2>
-            <button class="place__like-button" type="button"></button>
-          </div>
-        </li>
-        <li class="place__item"><img class="place__picture" src="./images/pictures/nekrasovka.jpg"
-            alt="Собачий приют. г.Москва">
-          <div class="place__content">
-            <h2 class="place__text">Собачий приют - Некрасовка</h2>
-            <button class="place__like-button" type="button"></button>
-          </div>
-        </li>
-        <li class="place__item"><img class="place__picture" src="./images/pictures/thailand.jpg"
-            alt="Майя Бэй, о.Пхи-Пхи-Ле, Таиланд.">
-          <div class="place__content">
-            <h2 class="place__text">Тайланд</h2>
-            <button class="place__like-button" type="button"></button>
-          </div>
-        </li>
-        <li class="place__item"><img class="place__picture" src="./images/pictures/dubai.jpg"
-            alt="«Бурдж-Хали́фа». Дубай">
-          <div class="place__content">
-            <h2 class="place__text">Дубай</h2>
-            <button class="place__like-button" type="button"></button>
-          </div>
-        </li>
       </ul>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__text">&copy; 2023 Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <template class="place__card">
+    <li class="place__item">
+      <img class="place__picture" src="#" alt="">
+      <div class="place__content">
+        <h2 class="place__text"></h2>
+        <button class="place__like-button" type="button"></button>
+      </div>
+    </li>
+  </template>
+  <div class="popup popup_type_profile">
     <div class="popup__container">
       <h2 class="popup__header">Редактировать профиль</h2>
       <button type="button" class="popup__close-button" aria-label="Закрыть окно редактирования профиля"></button>
@@ -88,7 +55,21 @@
       </form>
     </div>
   </div>
+  <!-- Проверить все теги -->
+  <div class="popup popup_type_card">
+    <div class="popup__container">
+      <h2 class="popup__header">Новое место</h2>
+      <button type="button" class="popup__close-button" aria-label="Закрыть окно редактирования профиля"></button>
+      <form class="popup__form" name="profile" method="post">
+        <input class="popup__input popup__input_type_place" type="text" name="place" placeholder="Название" required>
+        <input class="popup__input popup__input_type_src" type="text" name="src" placeholder="Ссылка на картинку"
+          required>
+        <button type="submit" class="popup__save-button">Создать</button>
+      </form>
+    </div>
+  </div>
   <script src="./scripts/popup.js"></script>
+  <script src="./scripts/cards.js"></script>
 </body>
 
 </html>

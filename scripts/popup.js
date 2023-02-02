@@ -1,23 +1,34 @@
-let popupProfile = document.querySelector('.popup');
-let btnEdit = document.querySelector('.profile__edit-button');
-let btnClose = document.querySelector('.popup__close-button');
-let profileName = document.querySelector('.profile__name');
-let profileJob = document.querySelector('.profile__job');
-let formElement = document.querySelector('.popup__form');
-let nameInput = document.querySelector('.popup__input_type_name');
-let jobInput = document.querySelector('.popup__input_type_job');
+const popupProfile = document.querySelector('.popup_type_profile');
+const btnEdit = document.querySelector('.profile__edit-button');
+const btnClose = document.querySelector('.popup__close-button');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__job');
+const formElement = document.querySelector('.popup__form');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_job');
+const popupCard = document.querySelector('.popup_type_card');
+const addCard = document.querySelector('.profile__add-button');
 
-function popupShow() {
-  popupProfile.classList.add('popup_opened');
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+// Раскидать этот бордак выше и ниже. Все упорядочить
+
+function popupOpen(popup) {
+  popup.classList.add('popup_opened');
 }
 
 function popupClose() {
   popupProfile.classList.remove('popup_opened');
 }
 
-btnEdit.addEventListener('click', popupShow);
+btnEdit.addEventListener('click', () => {
+  popupOpen(popupProfile);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+});
+
+addCard.addEventListener('click', () => {
+  popupOpen(popupCard);
+});
+
 btnClose.addEventListener('click', popupClose);
 
 function handleFormSubmit(evt) {
