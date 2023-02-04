@@ -22,6 +22,7 @@
 @import url(../blocks/place/__list/place__list.css);
 @import url(../blocks/place/__item/place__item.css);
 @import url(../blocks/place/__picture/place__picture.css);
+@import url(../blocks/place/__trash-button/place__trash-button.css);
 @import url(../blocks/place/__content/place__content.css);
 @import url(../blocks/place/__text/place__text.css);
 @import url(../blocks/place/__like-button/place__like-button.css);
