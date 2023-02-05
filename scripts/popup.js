@@ -1,4 +1,5 @@
 // Попап
+const allPopup = document.querySelectorAll('.popup');
 const profilePopup = document.querySelector('.popup_type_profile');
 const cardPopup = document.querySelector('.popup_type_card');
 // Инпуты попап
@@ -12,8 +13,6 @@ const formElementCard = document.querySelector('.popup__form-card');
 // Кнопки попап
 const btnEdit = document.querySelector('.profile__edit-button');
 const btnAddCard = document.querySelector('.profile__add-button');
-const btnCloseProfile = profilePopup.querySelector('.popup__close-button');
-const btnCloseCard = cardPopup.querySelector('.popup__close-button');
 // Получение активных данных профиля
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
@@ -49,16 +48,14 @@ btnAddCard.addEventListener('click', () => {
   openPopup(cardPopup);
 });
 
-// Закрывашки попапов
-btnCloseProfile.addEventListener('click', () => {
-  closePopup(profilePopup);
+// Закрывашка попапов
+allPopup.forEach((item) => {
+  item.querySelector('.popup__close-button').addEventListener('click', () => {
+    closePopup(item);
   });
+});
 
-btnCloseCard.addEventListener('click', () => {
-  closePopup(cardPopup);
-})
-
-// Получаю новые данные профиля
+// Получить новые данные имени и профессии от пользователя
 function handleFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
@@ -67,7 +64,7 @@ function handleFormSubmit(evt) {
 }
 formElement.addEventListener('submit', handleFormSubmit);
 
-// Создаю карточку
+// Создать карточку нового места
 function cardTemplate(newPlace, newSrc) {
   const card = templateCard.cloneNode(true);
   card.querySelector('.place__text').textContent = newPlace;
@@ -84,7 +81,7 @@ function cardTemplate(newPlace, newSrc) {
   return card;
 }
 
-// Получаю данные на новую карточку от пользователя
+// Получить новое имя места и ссылку
 function handleFormSubmitCard(evt) {
   evt.preventDefault();
   const card = cardTemplate(placeInput.value, srcInput.value);
@@ -93,7 +90,7 @@ function handleFormSubmitCard(evt) {
 }
 formElementCard.addEventListener('submit', handleFormSubmitCard);
 
-// Показываю 6 дефолтных карточек
+// Показать 6 дефолтных карточек
 function defaultCards() {
   initialCards.forEach((item) => {
     listCards.append(cardTemplate(item.name, item.link));
