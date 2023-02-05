@@ -80,8 +80,11 @@ function cardTemplate(newPlace, newSrc) {
   btnTrash.addEventListener('click', () => {
     card.remove();
   });
-  card.addEventListener('click', () => {
-    console.log('aaa');
+  card.querySelector('.place__picture').addEventListener('click', () => {
+    openPopup(imagePopup);
+    imagePopup.querySelector('.popup__image-viewing').src = newSrc;
+    imagePopup.querySelector('.popup__image-title').alt = newPlace;
+    imagePopup.querySelector('.popup__image-title').textContent = newPlace;
   })
   return card;
 }
