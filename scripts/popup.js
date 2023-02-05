@@ -2,13 +2,14 @@
 const allPopup = document.querySelectorAll('.popup');
 const profilePopup = document.querySelector('.popup_type_profile');
 const cardPopup = document.querySelector('.popup_type_card');
+const imagePopup = document.querySelector('.popup_type_image');
 // Инпуты попап
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
 const placeInput = document.querySelector('.popup__input_type_place');
 const srcInput = document.querySelector('.popup__input_type_src');
 // Формы попап
-const formElement = document.querySelector('.popup__form-profile');
+const formElementProfile = document.querySelector('.popup__form-profile');
 const formElementCard = document.querySelector('.popup__form-card');
 // Кнопки попап
 const btnEdit = document.querySelector('.profile__edit-button');
@@ -45,6 +46,7 @@ btnEdit.addEventListener('click', () => {
 });
 
 btnAddCard.addEventListener('click', () => {
+  formElementCard.reset();
   openPopup(cardPopup);
 });
 
@@ -62,7 +64,7 @@ function handleFormSubmit(evt) {
   profileJob.textContent = jobInput.value;
   closePopup(profilePopup);
 }
-formElement.addEventListener('submit', handleFormSubmit);
+formElementProfile.addEventListener('submit', handleFormSubmit);
 
 // Создать карточку нового места
 function cardTemplate(newPlace, newSrc) {
@@ -78,10 +80,13 @@ function cardTemplate(newPlace, newSrc) {
   btnTrash.addEventListener('click', () => {
     card.remove();
   });
+  card.addEventListener('click', () => {
+    console.log('aaa');
+  })
   return card;
 }
 
-// Получить новое имя места и ссылку
+// Получить новое имя места, ссылку, добавить на сайт карточку
 function handleFormSubmitCard(evt) {
   evt.preventDefault();
   const card = cardTemplate(placeInput.value, srcInput.value);
@@ -97,3 +102,17 @@ function defaultCards() {
   });
 }
 defaultCards();
+
+const job = [
+  'Папин бродяга, Мамин симоптяга',
+  'Городской сумасшедший',
+  'Щ-щ-щегол',
+  'Вечно молодой, вечно пьяный'
+];
+
+function randomJob() {
+  const index = Math.floor(Math.random() * job.length);
+  profileJob.textContent = job[index];
+}
+randomJob();
+
