@@ -8,6 +8,7 @@
   <meta name="description" content="Проектная работа №4-5 - Место - Сергея Прадько на Яндекс.Практикуме">
   <link rel="stylesheet" href="./pages/index.css">
   <script defer src="./scripts/constants.js"></script>
+  <script defer src="./scripts/validate.js"></script>
   <script defer src="./scripts/popup.js"></script>
   <title>Место</title>
 </head>
@@ -46,30 +47,39 @@
       </div>
     </li>
   </template>
+  <!-- Попап профиля -->
   <div class="popup popup_type_profile">
     <div class="popup__container">
       <h2 class="popup__header">Редактировать профиль</h2>
       <button type="button" class="popup__close-button" aria-label="Закрыть окно редактирования профиля"></button>
-      <form class="popup__form-profile" name="profile" method="post">
-        <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Введите имя" required>
+      <form class="popup__form-profile" name="profile" method="post" novalidate>
+        <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Введите имя"
+          minlength="2" maxlength="40" required>
+        <span></span>
         <input class="popup__input popup__input_type_job" type="text" name="job" placeholder="Введите профессию"
-          required>
+          minlength="2" maxlength="200" required>
+        <span></span>
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
     </div>
   </div>
+  <!-- Попап карточки -->
   <div class="popup popup_type_card">
     <div class="popup__container">
       <h2 class="popup__header">Новое место</h2>
       <button type="button" class="popup__close-button" aria-label="Закрыть окно редактирования карточки"></button>
-      <form class="popup__form-card" name="card" method="post">
-        <input class="popup__input popup__input_type_place" type="text" name="place" placeholder="Название" required>
-        <input class="popup__input popup__input_type_src" type="text" name="url" placeholder="Ссылка на картинку"
+      <form class="popup__form-card" name="card" method="post" novalidate>
+        <input class="popup__input popup__input_type_place" type="text" name="place" placeholder="Название"
+          minlength="2" maxlength="30" required>
+        <span></span>
+        <input class="popup__input popup__input_type_src" type="url" name="url" placeholder="Ссылка на картинку"
           required>
+        <span></span>
         <button type="submit" class="popup__save-button">Создать</button>
       </form>
     </div>
   </div>
+  <!-- Попап просмотра карточки -->
   <div class="popup popup_type_image">
     <figure class="popup__image-figure">
       <img class="popup__image-viewing" src="#" alt="">
