@@ -6,6 +6,7 @@
   font-size: 14px;
   line-height: 17px;
   width: 358px;
+  outline: none;
 }
 
 .popup__input:not(:last-of-type) {
