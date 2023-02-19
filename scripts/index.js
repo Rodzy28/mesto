@@ -23,10 +23,12 @@ const templateCard = document.querySelector('.place__card').content.querySelecto
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEscape);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEscape);
 }
 
 // Открывашки попапов
@@ -46,7 +48,20 @@ allPopups.forEach((item) => {
   item.querySelector('.popup__close-button').addEventListener('click', () => {
     closePopup(item);
   });
+
+  item.addEventListener('mousedown', (e) => {
+    if (e.target === e.currentTarget) {
+      closePopup(item);
+    }
+  });
 });
+
+// Закрытие попапов по ESCейпу
+const closePopupEscape = (e) => {
+  if (e.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  }
+}
 
 // Получить новые данные имени и профессии от пользователя
 function handleFormSubmitProfile(evt) {
@@ -88,6 +103,9 @@ function handleFormSubmitCard(evt) {
   const card = createNewCard(placeInput.value, srcInput.value);
   closePopup(cardPopup);
   listCards.prepend(card);
+  const saveButtonDisabled = evt.target.querySelector('.popup__save-button');
+  saveButtonDisabled.setAttribute('disabled', 'disabled');
+  saveButtonDisabled.classList.add(config.inactiveButtonClass);
 }
 formElementCard.addEventListener('submit', handleFormSubmitCard);
 
@@ -95,6 +113,7 @@ formElementCard.addEventListener('submit', handleFormSubmitCard);
 function renderDefaultCards() {
   initialCards.forEach((item) => {
     listCards.append(createNewCard(item.name, item.link));
+
   });
 }
 renderDefaultCards();
