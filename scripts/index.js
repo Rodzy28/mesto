@@ -3,6 +3,8 @@ const allPopups = document.querySelectorAll('.popup');
 const profilePopup = document.querySelector('.popup_type_profile');
 const cardPopup = document.querySelector('.popup_type_card');
 const imagePopup = document.querySelector('.popup_type_image');
+const imageViewing = imagePopup.querySelector('.popup__image-viewing');
+const imageTitle = imagePopup.querySelector('.popup__image-title');
 // Инпуты попап
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
@@ -89,10 +91,9 @@ function createNewCard(newPlace, newSrc) {
   });
   card.querySelector('.place__picture').addEventListener('click', () => {
     openPopup(imagePopup);
-    const imageViewing = imagePopup.querySelector('.popup__image-viewing');
     imageViewing.src = newSrc;
     imageViewing.alt = newPlace;
-    imagePopup.querySelector('.popup__image-title').textContent = newPlace;
+    imageTitle.textContent = newPlace;
   })
   return card;
 }
@@ -103,9 +104,8 @@ function handleFormSubmitCard(evt) {
   const card = createNewCard(placeInput.value, srcInput.value);
   closePopup(cardPopup);
   listCards.prepend(card);
-  const saveButtonDisabled = evt.target.querySelector('.popup__save-button');
-  saveButtonDisabled.setAttribute('disabled', 'disabled');
-  saveButtonDisabled.classList.add(config.inactiveButtonClass);
+  evt.submitter.setAttribute('disabled', 'disabled');
+  evt.submitter.classList.add(config.inactiveButtonClass);
 }
 formElementCard.addEventListener('submit', handleFormSubmitCard);
 
