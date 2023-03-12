@@ -35,6 +35,13 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupEscape);
 }
 
+function viewingCard(data) {
+  openPopup(imagePopup);
+  imageViewing.src = data.link;
+  imageViewing.alt = data.name;
+  imageTitle.textContent = data.name;
+}
+
 // Открывашки попапов
 btnEdit.addEventListener('click', () => {
   openPopup(profilePopup);
@@ -90,7 +97,7 @@ formElementCard.addEventListener('submit', handleFormSubmitCard);
 // Показать 6 дефолтных карточек
 function renderDefaultCards() {
   initialCards.forEach((item) => {
-    const card = new Card(item, '.place__card', openPopup);
+    const card = new Card(item, '.place__card', viewingCard);
     const cardElement = card.generateCard();
     listCards.append(cardElement);
   });
@@ -100,7 +107,7 @@ renderDefaultCards();
 const jobsArray = [
   'Папин бродяга, Мамин симоптяга',
   'Городской сумасшедший',
-  'Вечно молодой, вечно пьяный'
+  'Вечно молодой, вечно ворчливый, как старый дед',
 ];
 
 function fillRandomJob() {

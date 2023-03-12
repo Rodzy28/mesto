@@ -1,9 +1,9 @@
 export class Card {
-  constructor(data, templateSelector, openPopup) {
+  constructor(data, templateSelector, viewingCard) {
     this._newPlace = data.name;
     this._newSrc = data.link;
     this._templateSelector = templateSelector;
-    this._openPopup = openPopup;
+    this._viewingCard = viewingCard;
   }
 
   _getTemplate() {
@@ -32,10 +32,7 @@ export class Card {
   }
 
   _openCardView() {
-    this._openPopup(document.querySelector('.popup_type_image'));
-    imageViewing.src = this._newSrc;
-    imageViewing.alt = this._newPlace;
-    imageTitle.textContent = this._newPlace;
+    this._viewingCard({name: this._newPlace, link: this._newSrc});
   }
 
   generateCard() {
