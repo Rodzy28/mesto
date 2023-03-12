@@ -1,5 +1,5 @@
 // Первые 6 карточек
-const initialCards = [
+export const initialCards = [
   { name: 'Шри-Ланка', link: './images/pictures/sri_lanka.jpg' },
   { name: 'Кипр', link: './images/pictures/cyprus.jpg' },
   { name: 'Белёв', link: './images/pictures/belev.jpg' },

@@ -1,3 +1,6 @@
+import {initialCards} from './constants.js';
+import {Card} from './Card.js';
+
 // Попап
 const allPopups = document.querySelectorAll('.popup');
 const profilePopup = document.querySelector('.popup_type_profile');
@@ -73,56 +76,6 @@ function handleFormSubmitProfile(evt) {
 }
 formElementProfile.addEventListener('submit', handleFormSubmitProfile);
 
-
-class Card {
-  constructor(data, templateSelector) {
-    this._newPlace = data.name;
-    this._newSrc = data.link;
-    this._templateSelector = templateSelector;
-  }
-
-  _getTemplate() {
-    const cardElement = document.querySelector(this._templateSelector).content.querySelector('.place__item').cloneNode(true);
-    return cardElement;
-  }
-
-  _setEventListeners() {
-    this._element.querySelector('.place__like-button').addEventListener('click', () => {
-      this._handleButtonLike();
-    });
-    this._element.querySelector('.place__trash-button').addEventListener('click', () => {
-      this._handleButtonTrash();
-    });
-    this._element.querySelector('.place__picture').addEventListener('click', () => {
-      this._openCardView();
-    })
-  }
-
-  _handleButtonLike() {
-    this._element.querySelector('.place__like-button').classList.toggle('place__like-button_active');
-  }
-
-  _handleButtonTrash() {
-    this._element.remove();
-  }
-
-  _openCardView() {
-    openPopup(imagePopup);
-    imageViewing.src = this._newSrc;
-    imageViewing.alt = this._newPlace;
-    imageTitle.textContent = this._newPlace;
-  }
-
-  generateCard() {
-    this._element = this._getTemplate();
-    this._setEventListeners();
-    this._element.querySelector('.place__picture').src = this._newSrc;
-    this._element.querySelector('.place__picture').alt = this._newPlace;
-    this._element.querySelector('.place__text').textContent = this._newPlace;
-    return this._element;
-  }
-}
-
 // Получить новое имя места, ссылку, добавить на сайт карточку
 function handleFormSubmitCard(evt) {
   evt.preventDefault();
@@ -137,7 +90,7 @@ formElementCard.addEventListener('submit', handleFormSubmitCard);
 // Показать 6 дефолтных карточек
 function renderDefaultCards() {
   initialCards.forEach((item) => {
-    const card = new Card(item, '.place__card');
+    const card = new Card(item, '.place__card', openPopup);
     const cardElement = card.generateCard();
     listCards.append(cardElement);
   });
