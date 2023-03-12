@@ -126,9 +126,9 @@ class Card {
 // Получить новое имя места, ссылку, добавить на сайт карточку
 function handleFormSubmitCard(evt) {
   evt.preventDefault();
-  const card = [{name: placeInput.value, link: srcInput.value}];
+  const card = new Card({name: placeInput.value, link: srcInput.value}, '.place__card');
   closePopup(cardPopup);
-  listCards.prepend(renderDefaultCards(card));
+  listCards.prepend(card.generateCard());
   evt.submitter.setAttribute('disabled', 'disabled');
   evt.submitter.classList.add(config.inactiveButtonClass);
 }
