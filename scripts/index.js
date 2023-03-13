@@ -1,5 +1,6 @@
 import {initialCards} from './constants.js';
 import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
 
 // Попап
 const allPopups = document.querySelectorAll('.popup');
@@ -24,6 +25,22 @@ const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 // Шаблон карточек
 const listCards = document.querySelector('.place__list');
+
+// Конфиг с селекторами и классами формы
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+const profileCheck = new FormValidator(config, profilePopup);
+profileCheck.enableValidation();
+
+const cardCheck= new FormValidator(config, cardPopup);
+cardCheck.enableValidation();
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
