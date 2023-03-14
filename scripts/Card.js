@@ -1,14 +1,19 @@
 export class Card {
-  constructor(data, templateSelector, viewingCard) {
+  constructor(data, templateSelector, openImagePopup) {
     this._newPlace = data.name;
     this._newSrc = data.link;
     this._templateSelector = templateSelector;
-    this._viewingCard = viewingCard;
+    this._openImagePopup = openImagePopup;
   }
 
-  _getTemplate() {
-    const cardElement = document.querySelector(this._templateSelector).content.querySelector('.place__item').cloneNode(true);
-    return cardElement;
+  generateCard() {
+    this._element = this._getTemplate();
+    this._placePicture = this._element.querySelector('.place__picture');
+    this._placePicture.src = this._newSrc;
+    this._placePicture.alt = this._newPlace;
+    this._element.querySelector('.place__text').textContent = this._newPlace;
+    this._setEventListeners();
+    return this._element;
   }
 
   _setEventListeners() {
@@ -18,9 +23,14 @@ export class Card {
     this._element.querySelector('.place__trash-button').addEventListener('click', () => {
       this._handleButtonTrash();
     });
-    this._element.querySelector('.place__picture').addEventListener('click', () => {
+    this._placePicture.addEventListener('click', () => {
       this._openCardView();
     })
+  }
+
+  _getTemplate() {
+    const cardElement = document.querySelector(this._templateSelector).content.querySelector('.place__item').cloneNode(true);
+    return cardElement;
   }
 
   _handleButtonLike() {
@@ -32,15 +42,6 @@ export class Card {
   }
 
   _openCardView() {
-    this._viewingCard({name: this._newPlace, link: this._newSrc});
-  }
-
-  generateCard() {
-    this._element = this._getTemplate();
-    this._setEventListeners();
-    this._element.querySelector('.place__picture').src = this._newSrc;
-    this._element.querySelector('.place__picture').alt = this._newPlace;
-    this._element.querySelector('.place__text').textContent = this._newPlace;
-    return this._element;
+    this._openImagePopup({ name: this._newPlace, link: this._newSrc });
   }
 }

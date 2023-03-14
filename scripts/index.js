@@ -1,6 +1,6 @@
-import {initialCards} from './constants.js';
-import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js';
+import { initialCards } from './constants.js';
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
 
 // Попап
 const allPopups = document.querySelectorAll('.popup');
@@ -39,7 +39,7 @@ const config = {
 const profileCheck = new FormValidator(config, profilePopup);
 profileCheck.enableValidation();
 
-const cardCheck= new FormValidator(config, cardPopup);
+const cardCheck = new FormValidator(config, cardPopup);
 cardCheck.enableValidation();
 
 function openPopup(popup) {
@@ -52,7 +52,7 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupEscape);
 }
 
-function viewingCard(data) {
+function openImagePopup(data) {
   openPopup(imagePopup);
   imageViewing.src = data.link;
   imageViewing.alt = data.name;
@@ -61,12 +61,15 @@ function viewingCard(data) {
 
 // Открывашки попапов
 btnEdit.addEventListener('click', () => {
+  profileCheck.resetErrorMessage();
   openPopup(profilePopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 });
 
+// Скидывыю ранее введенный данные в попап новой карточки
 btnAddCard.addEventListener('click', () => {
+  cardCheck.resetErrorMessage();
   formElementCard.reset();
   openPopup(cardPopup);
 });
@@ -100,26 +103,25 @@ function handleFormSubmitProfile(evt) {
 }
 formElementProfile.addEventListener('submit', handleFormSubmitProfile);
 
+// Функция возврата новой карточки через класс
+function createCard(data) {
+  const card = new Card(data, '.place__card', openImagePopup);
+  return card.generateCard();
+}
+
 // Получить новое имя места, ссылку, добавить на сайт карточку
 function handleFormSubmitCard(evt) {
   evt.preventDefault();
-  const card = new Card({name: placeInput.value, link: srcInput.value}, '.place__card');
+  const data = { name: placeInput.value, link: srcInput.value };
   closePopup(cardPopup);
-  listCards.prepend(card.generateCard());
-  evt.submitter.setAttribute('disabled', 'disabled');
-  evt.submitter.classList.add(config.inactiveButtonClass);
+  listCards.prepend(createCard(data));
 }
 formElementCard.addEventListener('submit', handleFormSubmitCard);
 
-// Показать 6 дефолтных карточек
-function renderDefaultCards() {
-  initialCards.forEach((item) => {
-    const card = new Card(item, '.place__card', viewingCard);
-    const cardElement = card.generateCard();
-    listCards.append(cardElement);
-  });
-}
-renderDefaultCards();
+// Показать дефолтные карточки
+initialCards.forEach((item) => {
+  listCards.append(createCard(item));
+});
 
 const jobsArray = [
   'Папин бродяга, Мамин симоптяга',

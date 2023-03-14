@@ -61,4 +61,10 @@ export class FormValidator {
       return !inputElement.validity.valid;
     });
   };
+
+  resetErrorMessage() {
+    this._inputList.forEach((inputElement) => {
+      this._hideErrorMessage(inputElement);
+    });
+  }
 }
