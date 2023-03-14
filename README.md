@@ -1,7 +1,7 @@
 # Яндекс.Практикум
 
 ## Проект: Место
-Проект выполнен в рамках проектной работы 4-5-6 на Яндекс.Практикум.
+Проект выполнен в рамках проектной работы №4-5-6-7 на Яндекс.Практикум.
 
 ### О проекте
 Проектная работа посвящена некоторым местам в которых побывал автор.
@@ -16,9 +16,7 @@
 
 ### Чеклист:
 
-* [Чеклист ПР_4](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-4.pdf)
-* [Чеклист ПР_5](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-5.pdf)
-* [Чеклист ПР_6](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-6.pdf)
+* [Чеклист ПР_7](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-7.pdf)
 
 ### С помощью чего и как это сделано:
 - HTML5
@@ -40,6 +38,7 @@
 - [X] Закрытие попапов кнопкой ESC
 - [X] Просмотр попапов кликом на оверлей
 - [X] Валидация форм
+- [X] ООП
 
 ### Планы на улучшения:
 Добавить функционал:
