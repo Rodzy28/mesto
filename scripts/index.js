@@ -115,6 +115,7 @@ function handleFormSubmitCard(evt) {
   const data = { name: placeInput.value, link: srcInput.value };
   closePopup(cardPopup);
   listCards.prepend(createCard(data));
+  cardCheck.disableSubmitButton(evt);
 }
 formElementCard.addEventListener('submit', handleFormSubmitCard);
 

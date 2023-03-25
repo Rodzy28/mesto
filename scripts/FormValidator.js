@@ -13,6 +13,11 @@ export class FormValidator {
     this._setEventListeners();
   }
 
+  disableSubmitButton(evt) {
+    evt.submitter.setAttribute('disabled', 'disabled');
+    evt.submitter.classList.add(this._inactiveButtonClass);
+  }
+
   _setEventListeners() {
     this._inputList = Array.from(this._checkForm.querySelectorAll(this._inputSelector));
     this._toggleButtonState();
