@@ -1,19 +1,25 @@
+import Popup from './Popup.js';
+import Section from './Section.js';
 import { initialCards } from './constants.js';
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js'
+import UserInfo from './UserInfo.js';
 
 // Попап
-const allPopups = document.querySelectorAll('.popup');
+// const allPopups = document.querySelectorAll('.popup');
 const profilePopup = document.querySelector('.popup_type_profile');
 const cardPopup = document.querySelector('.popup_type_card');
 const imagePopup = document.querySelector('.popup_type_image');
-const imageViewing = imagePopup.querySelector('.popup__image-viewing');
-const imageTitle = imagePopup.querySelector('.popup__image-title');
+// const imageViewing = imagePopup.querySelector('.popup__image-viewing');
+// const imageTitle = imagePopup.querySelector('.popup__image-title');
+
 // Инпуты попап
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
-const placeInput = document.querySelector('.popup__input_type_place');
-const srcInput = document.querySelector('.popup__input_type_src');
+// const placeInput = document.querySelector('.popup__input_type_place');
+// const srcInput = document.querySelector('.popup__input_type_src');
 // Формы попап
 const formElementProfile = document.querySelector('.popup__form-profile');
 const formElementCard = document.querySelector('.popup__form-card');
@@ -36,56 +42,80 @@ const config = {
   errorClass: 'popup__error_visible'
 };
 
+const userInfo = new UserInfo({profileName, profileJob});
+
 const profileCheck = new FormValidator(config, profilePopup);
 profileCheck.enableValidation();
 
 const cardCheck = new FormValidator(config, cardPopup);
 cardCheck.enableValidation();
 
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupEscape);
+const popupWithImage = new PopupWithImage(imagePopup);
+const openImagePopup = (data) => {
+  popupWithImage.open(data)
 }
+popupWithImage.setEventListeners();
+
+// Функция возврата новой карточки через класс
+function createCard(data) {
+  const card = new Card(data, '.place__card', openImagePopup);
+  return card.generateCard();
+}
+
+const cardRender = new Section({ items: initialCards, renderer: createCard }, listCards);
+cardRender.renderDefaultCards();
+
+const handleFormSubmitCard = ({ place, url }) => {
+  cardRender.addItem(createCard({name: place, link: url}));
+}
+
+const handleFormSubmitProfile = ({name, job}) => {
+  userInfo.setUserInfo({name, job});
+}
+
+const popupAddNewProfile = new PopupWithForm(profilePopup, handleFormSubmitProfile);
+popupAddNewProfile.setEventListeners();
+
+const popupAddNewCard = new PopupWithForm(cardPopup, handleFormSubmitCard);
+popupAddNewCard.setEventListeners();
+
+// function openPopup(popup) {
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keydown', closePopupEscape);
+// }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEscape);
 }
 
-function openImagePopup(data) {
-  openPopup(imagePopup);
-  imageViewing.src = data.link;
-  imageViewing.alt = data.name;
-  imageTitle.textContent = data.name;
-}
-
 // Открывашки попапов
 btnEdit.addEventListener('click', () => {
   profileCheck.resetErrorMessage();
-  openPopup(profilePopup);
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+  popupAddNewProfile.open();
+  userInfo.getUserInfo();
+  // nameInput.value = profileName.textContent;
+  // jobInput.value = profileJob.textContent;
 });
 
-// Скидывыю ранее введенный данные в попап новой карточки
+// Скидываю ранее введенный данные в попап новой карточки
 btnAddCard.addEventListener('click', () => {
   cardCheck.resetErrorMessage();
-  formElementCard.reset();
-  openPopup(cardPopup);
+  popupAddNewCard.open();
 });
 
 // Закрывашка попапов
-allPopups.forEach((item) => {
-  item.querySelector('.popup__close-button').addEventListener('click', () => {
-    closePopup(item);
-  });
+// allPopups.forEach((item) => {
+//   item.querySelector('.popup__close-button').addEventListener('click', () => {
+//     closePopup(item);
+//   });
 
-  item.addEventListener('mousedown', (e) => {
-    if (e.target === e.currentTarget) {
-      closePopup(item);
-    }
-  });
-});
+//   item.addEventListener('mousedown', (e) => {
+//     if (e.target === e.currentTarget) {
+//       closePopup(item);
+//     }
+//   });
+// });
 
 // Закрытие попапов по ESCейпу
 const closePopupEscape = (e) => {
@@ -95,34 +125,30 @@ const closePopupEscape = (e) => {
 }
 
 // Получить новые данные имени и профессии от пользователя
-function handleFormSubmitProfile(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopup(profilePopup);
-}
-formElementProfile.addEventListener('submit', handleFormSubmitProfile);
+// function handleFormSubmitProfile(evt) {
+  // evt.preventDefault();
+  // profileName.textContent = nameInput.value;
+  // profileJob.textContent = jobInput.value;
+//   closePopup(profilePopup);
+// }
+// formElementProfile.addEventListener('submit', handleFormSubmitProfile);
 
-// Функция возврата новой карточки через класс
-function createCard(data) {
-  const card = new Card(data, '.place__card', openImagePopup);
-  return card.generateCard();
-}
+
 
 // Получить новое имя места, ссылку, добавить на сайт карточку
-function handleFormSubmitCard(evt) {
-  evt.preventDefault();
-  const data = { name: placeInput.value, link: srcInput.value };
-  closePopup(cardPopup);
-  listCards.prepend(createCard(data));
-  cardCheck.disableSubmitButton(evt);
-}
-formElementCard.addEventListener('submit', handleFormSubmitCard);
+// function handleFormSubmitCard(evt) {
+//   evt.preventDefault();
+//   const data = { name: placeInput.value, link: srcInput.value };
+//   closePopup(cardPopup);
+//   listCards.prepend(createCard(data));
+//   cardCheck.disableSubmitButton(evt);
+// }
+// formElementCard.addEventListener('submit', handleFormSubmitCard);
 
 // Показать дефолтные карточки
-initialCards.forEach((item) => {
-  listCards.append(createCard(item));
-});
+// initialCards.forEach((item) => {
+//   listCards.append(createCard(item));
+// });
 
 const jobsArray = [
   'Папин бродяга, Мамин симоптяга',
