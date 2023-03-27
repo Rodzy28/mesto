@@ -13,9 +13,9 @@ export default class FormValidator {
     this._setEventListeners();
   }
 
-  disableSubmitButton(evt) {
-    evt.submitter.setAttribute('disabled', 'disabled');
-    evt.submitter.classList.add(this._inactiveButtonClass);
+  disableSubmitButton() {
+    this._btnSubmit.setAttribute('disabled', 'disabled');
+    this._btnSubmit.classList.add(this._inactiveButtonClass);
   }
 
   _setEventListeners() {

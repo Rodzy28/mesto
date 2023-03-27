@@ -39,6 +39,7 @@ export default class Card {
 
   _handleButtonTrash() {
     this._element.remove();
+    this._element = null;
   }
 
   _openCardView() {
