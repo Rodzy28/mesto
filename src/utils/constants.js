@@ -7,3 +7,44 @@ export const initialCards = [
   { name: 'Тайланд', link: './images/pictures/thailand.jpg' },
   { name: 'Дубай', link: './images/pictures/dubai.jpg' }
 ];
+
+// Конфиг с селекторами и классами формы
+export const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+// Попап
+export const profilePopup = document.querySelector('.popup_type_profile');
+export const cardPopup = document.querySelector('.popup_type_card');
+export const imagePopup = document.querySelector('.popup_type_image');
+
+// Инпуты попап
+export const nameInput = document.querySelector('.popup__input_type_name');
+export const jobInput = document.querySelector('.popup__input_type_job');
+
+// Кнопки попап
+export const btnEdit = document.querySelector('.profile__edit-button');
+export const btnAddCard = document.querySelector('.profile__add-button');
+
+// Получение активных данных профиля
+export const profileName = document.querySelector('.profile__name');
+export const profileJob = document.querySelector('.profile__job');
+// Шаблон карточек
+export const listCards = document.querySelector('.place__list');
+
+// const jobsArray = [
+//   'Папин бродяга, Мамин симоптяга',
+//   'Городской сумасшедший',
+//   'Вечно молодой, вечно ворчливый, как старый дед',
+// ];
+
+// function fillRandomJob() {
+//   const index = Math.floor(Math.random() * jobsArray.length);
+//   profileJob.textContent = jobsArray[index];
+// }
+// fillRandomJob();

@@ -1,3 +1,5 @@
+import { nameInput, jobInput } from '../utils/constants.js';
+
 export default class UserInfo {
   constructor({ profileName, profileJob }) {
     this._name = profileName;
@@ -5,8 +7,8 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    document.querySelector('.popup__input_type_name').value = this._name.textContent;
-    document.querySelector('.popup__input_type_job').value = this._job.textContent;
+    nameInput.value = this._name.textContent;
+    jobInput.value = this._job.textContent;
   }
 
   setUserInfo({ name, job }) {

@@ -1,45 +1,16 @@
 import Section from '../components/Section.js';
-import { initialCards } from '../utils/constants.js';
+import {
+  initialCards,
+  config, profilePopup,
+  cardPopup, imagePopup,
+  btnEdit, btnAddCard,
+  profileName, profileJob, listCards
+} from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js'
 import UserInfo from '../components/UserInfo.js';
-
-// Попап
-// const allPopups = document.querySelectorAll('.popup');
-const profilePopup = document.querySelector('.popup_type_profile');
-const cardPopup = document.querySelector('.popup_type_card');
-const imagePopup = document.querySelector('.popup_type_image');
-// const imageViewing = imagePopup.querySelector('.popup__image-viewing');
-// const imageTitle = imagePopup.querySelector('.popup__image-title');
-
-// Инпуты попап
-// const nameInput = document.querySelector('.popup__input_type_name');
-// const jobInput = document.querySelector('.popup__input_type_job');
-// const placeInput = document.querySelector('.popup__input_type_place');
-// const srcInput = document.querySelector('.popup__input_type_src');
-// Формы попап
-// const formElementProfile = document.querySelector('.popup__form-profile');
-// const formElementCard = document.querySelector('.popup__form-card');
-// Кнопки попап
-const btnEdit = document.querySelector('.profile__edit-button');
-const btnAddCard = document.querySelector('.profile__add-button');
-// Получение активных данных профиля
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__job');
-// Шаблон карточек
-const listCards = document.querySelector('.place__list');
-
-// Конфиг с селекторами и классами формы
-const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
 
 const userInfo = new UserInfo({ profileName, profileJob });
 
@@ -92,16 +63,3 @@ btnAddCard.addEventListener('click', () => {
   cardCheck.disableSubmitButton();
   popupAddNewCard.open();
 });
-
-// const jobsArray = [
-//   'Папин бродяга, Мамин симоптяга',
-//   'Городской сумасшедший',
-//   'Вечно молодой, вечно ворчливый, как старый дед',
-// ];
-
-// function fillRandomJob() {
-//   const index = Math.floor(Math.random() * jobsArray.length);
-//   profileJob.textContent = jobsArray[index];
-// }
-// fillRandomJob();
-
