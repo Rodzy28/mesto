@@ -18,33 +18,22 @@ export const config = {
   errorClass: 'popup__error_visible'
 };
 
-// Попап
+// Попапы
 export const profilePopup = document.querySelector('.popup_type_profile');
 export const cardPopup = document.querySelector('.popup_type_card');
 export const imagePopup = document.querySelector('.popup_type_image');
 
-// Инпуты попап
+// Инпуты попап профиля
 export const nameInput = document.querySelector('.popup__input_type_name');
 export const jobInput = document.querySelector('.popup__input_type_job');
 
-// Кнопки попап
+// Кнопки открытия попапов
 export const btnEdit = document.querySelector('.profile__edit-button');
 export const btnAddCard = document.querySelector('.profile__add-button');
 
 // Получение активных данных профиля
 export const profileName = document.querySelector('.profile__name');
 export const profileJob = document.querySelector('.profile__job');
+
 // Шаблон карточек
 export const listCards = document.querySelector('.place__list');
-
-// const jobsArray = [
-//   'Папин бродяга, Мамин симоптяга',
-//   'Городской сумасшедший',
-//   'Вечно молодой, вечно ворчливый, как старый дед',
-// ];
-
-// function fillRandomJob() {
-//   const index = Math.floor(Math.random() * jobsArray.length);
-//   profileJob.textContent = jobsArray[index];
-// }
-// fillRandomJob();
