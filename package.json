@@ -1,0 +1,11 @@
+{
+  "name": "yandex.praktikum_mesto",
+  "version": "0.0.1",
+  "description": "PR8_Mesto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sergei Pradko",
+  "license": "ISC"
+}
