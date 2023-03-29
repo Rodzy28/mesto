@@ -5,7 +5,8 @@ import {
   config, profilePopup,
   cardPopup, imagePopup,
   btnEdit, btnAddCard,
-  profileName, profileJob, listCards
+  profileName, profileJob,
+  nameInput, jobInput, listCards
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -54,8 +55,10 @@ popupAddNewCard.setEventListeners();
 btnEdit.addEventListener('click', () => {
   profileCheck.resetErrorMessage();
   profileCheck.disableSubmitButton();
+  const { name, job } = userInfo.getUserInfo();
+  nameInput.value = name;
+  jobInput.value = job;
   popupAddNewProfile.open();
-  userInfo.getUserInfo();
 });
 
 // Скидываю ранее введенный данные в попап новой карточки

@@ -17,7 +17,8 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.place__like-button').addEventListener('click', () => {
+    this._likeButton = this._element.querySelector('.place__like-button');
+    this._likeButton.addEventListener('click', () => {
       this._handleButtonLike();
     });
     this._element.querySelector('.place__trash-button').addEventListener('click', () => {
@@ -34,7 +35,7 @@ export default class Card {
   }
 
   _handleButtonLike() {
-    this._element.querySelector('.place__like-button').classList.toggle('place__like-button_active');
+    this._likeButton.classList.toggle('place__like-button_active');
   }
 
   _handleButtonTrash() {
