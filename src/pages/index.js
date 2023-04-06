@@ -1,7 +1,6 @@
 import './index.css';
 import Section from '../components/Section.js';
 import {
-  initialCards,
   config, profilePopup,
   cardPopup, imagePopup,
   btnEdit, btnAddCard,
@@ -13,6 +12,24 @@ import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js'
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
+  headers: {
+    authorization: 'a12736da-b955-4664-b6d4-b697b2666b6e',
+    'Content-Type': 'application/json'
+  }
+});
+
+api.getInitialCards()
+  .then((data) => {
+    const cardRender = new Section({ data, renderer: createCard }, listCards);
+    return cardRender.renderDefaultCards();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const userInfo = new UserInfo({ profileName, profileJob });
 
@@ -34,11 +51,13 @@ function createCard(data) {
   return card.generateCard();
 }
 
-const cardRender = new Section({ items: initialCards, renderer: createCard }, listCards);
-cardRender.renderDefaultCards();
-
 const handleFormSubmitCard = ({ place, url }) => {
-  cardRender.addItem(createCard({ name: place, link: url }));
+  api.postNewCard({ name: place, link:url })
+    .then((data) => {
+      const cardRender = new Section({ data, renderer: createCard }, listCards);
+      cardRender.addItem(createCard(data));
+    });
+
 }
 
 const handleFormSubmitProfile = ({ name, job }) => {

@@ -1,20 +1,3 @@
-// Первые 6 карточек
-import sri_lanka from '../images/pictures/sri_lanka.jpg';
-import cyprus from '../images/pictures/cyprus.jpg';
-import belev from '../images/pictures/belev.jpg';
-import nekrasovka from '../images/pictures/nekrasovka.jpg';
-import thailand from '../images/pictures/thailand.jpg';
-import dubai from '../images/pictures/dubai.jpg';
-
-export const initialCards = [
-  { name: 'Шри-Ланка', link: sri_lanka },
-  { name: 'Кипр', link: cyprus },
-  { name: 'Белёв', link: belev },
-  { name: 'Собачий приют - Некрасовка', link: nekrasovka },
-  { name: 'Тайланд', link: thailand },
-  { name: 'Дубай', link: dubai }
-];
-
 // Конфиг с селекторами и классами формы
 export const config = {
   formSelector: '.popup__form',

@@ -12,7 +12,7 @@
 
 ### Ссылка на работу:
 
-* [Тык!](https://rodzy28.github.io/mesto/src/index.html)
+* [Тык!](https://rodzy28.github.io/mesto/index.html)
 
 ### Чеклист:
 
