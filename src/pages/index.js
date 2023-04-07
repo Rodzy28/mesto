@@ -4,7 +4,7 @@ import {
   config, profilePopup,
   cardPopup, imagePopup,
   btnEdit, btnAddCard,
-  profileName, profileJob,
+  nameSelector, aboutSelector,
   nameInput, jobInput, listCards
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
@@ -22,16 +22,17 @@ const api = new Api({
   }
 });
 
+const cardRender = new Section({ renderer: createCard }, listCards);
+
 api.getInitialCards()
   .then((data) => {
-    const cardRender = new Section({ data, renderer: createCard }, listCards);
-    return cardRender.renderDefaultCards();
+    return cardRender.renderDefaultCards(data);
   })
   .catch((err) => {
     console.log(err);
   });
 
-const userInfo = new UserInfo({ profileName, profileJob });
+const userInfo = new UserInfo({ nameSelector, aboutSelector });
 
 const profileCheck = new FormValidator(config, profilePopup);
 profileCheck.enableValidation();
@@ -45,20 +46,26 @@ const openImagePopup = (data) => {
 }
 popupWithImage.setEventListeners();
 
-// Функция возврата новой карточки через класс
 function createCard(data) {
   const card = new Card(data, '.place__card', openImagePopup);
   return card.generateCard();
 }
 
 const handleFormSubmitCard = ({ place, url }) => {
-  api.postNewCard({ name: place, link:url })
+  api.postNewCard({ name: place, link: url })
     .then((data) => {
-      const cardRender = new Section({ data, renderer: createCard }, listCards);
-      cardRender.addItem(createCard(data));
+      return cardRender.addItem(createCard(data));
+    }).catch((err) => {
+      console.log(err);
     });
-
 }
+
+api.getUserInfo()
+  .then((data) => {
+    return userInfo.setUserInfo(data);
+  }).catch((err) => {
+    console.log(err);
+  });
 
 const handleFormSubmitProfile = ({ name, job }) => {
   userInfo.setUserInfo({ name, job });

@@ -22,8 +22,8 @@ export const btnEdit = document.querySelector('.profile__edit-button');
 export const btnAddCard = document.querySelector('.profile__add-button');
 
 // Получение активных данных профиля
-export const profileName = document.querySelector('.profile__name');
-export const profileJob = document.querySelector('.profile__job');
+export const nameSelector = document.querySelector('.profile__name');
+export const aboutSelector = document.querySelector('.profile__job');
 
 // Шаблон карточек
 export const listCards = document.querySelector('.place__list');

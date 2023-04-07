@@ -30,30 +30,17 @@ export default class Api {
     });
   }
 
-  // getList() {
-  //   return fetch('https://mesto.nomoreparties.co/v1/cohort-63/cards', {
-  //     headers: {
-  //       authorization: 'a12736da-b955-4664-b6d4-b697b2666b6e'
-  //     }
-  //   })
-  //     .then(res => {
-  //       if (res.ok) {
-  //         console.log(res.json());
-  //       }
-  //     });
-  // }
+  getUserInfo() {
+    return fetch('https://nomoreparties.co/v1/cohort-63/users/me', {
+      headers: this._headers,
+    }).then(res => {
+      if (res.ok) {
+        return res.json();
+      }
 
-//   getUserInfo() {
-//     return fetch('https://nomoreparties.co/v1/cohort-63/users/me', {
-//       headers: this._headers,
-//     }).then(res => {
-//       if (res.ok) {
-//         return res.json();
-//       }
-
-//       return Promise.reject(`Ошибка: ${res.status}`);
-//     });
-// }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
 
 }
 
