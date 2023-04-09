@@ -15,7 +15,7 @@ export const imagePopup = document.querySelector('.popup_type_image');
 
 // Инпуты попап профиля
 export const nameInput = document.querySelector('.popup__input_type_name');
-export const jobInput = document.querySelector('.popup__input_type_job');
+export const jobInputSelector = document.querySelector('.popup__input_type_job');
 
 // Кнопки открытия попапов
 export const btnEdit = document.querySelector('.profile__edit-button');

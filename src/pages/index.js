@@ -5,7 +5,7 @@ import {
   cardPopup, imagePopup,
   btnEdit, btnAddCard,
   nameSelector, aboutSelector,
-  nameInput, jobInput, listCards
+  nameInput, jobInputSelector, listCards
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -13,6 +13,8 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js'
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
+
+let userID = null;
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
@@ -22,22 +24,21 @@ const api = new Api({
   }
 });
 
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([ userData, cards ]) => {
+    userID = userData._id;
+    cardRender.renderCardsFromServer(cards);
+    userInfo.setUserInfo(userData);
+}).catch((err) => {
+  console.log(err);
+});
+
 const cardRender = new Section({ renderer: createCard }, listCards);
-
-api.getInitialCards()
-  .then((data) => {
-    return cardRender.renderDefaultCards(data);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
 const userInfo = new UserInfo({ nameSelector, aboutSelector });
-
 const profileCheck = new FormValidator(config, profilePopup);
-profileCheck.enableValidation();
-
 const cardCheck = new FormValidator(config, cardPopup);
+
+profileCheck.enableValidation();
 cardCheck.enableValidation();
 
 const popupWithImage = new PopupWithImage(imagePopup);
@@ -60,15 +61,13 @@ const handleFormSubmitCard = ({ place, url }) => {
     });
 }
 
-api.getUserInfo()
+const handleFormSubmitProfile = ({ name, job }) => {
+  api.setUserInfo({ name: name, about: job })
   .then((data) => {
-    return userInfo.setUserInfo(data);
+    userInfo.setUserInfo(data);
   }).catch((err) => {
     console.log(err);
-  });
-
-const handleFormSubmitProfile = ({ name, job }) => {
-  userInfo.setUserInfo({ name, job });
+  });;
 }
 
 const popupAddNewProfile = new PopupWithForm(profilePopup, handleFormSubmitProfile);
@@ -83,7 +82,7 @@ btnEdit.addEventListener('click', () => {
   profileCheck.disableSubmitButton();
   const { name, job } = userInfo.getUserInfo();
   nameInput.value = name;
-  jobInput.value = job;
+  jobInputSelector.value = job;
   popupAddNewProfile.open();
 });
 
