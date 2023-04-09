@@ -33,6 +33,11 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   console.log(err);
 });
 
+const createCard = (data) => {
+  const card = new Card(data, '.place__card', openImagePopup);
+  return card.generateCard();
+};
+
 const cardRender = new Section({ renderer: createCard }, listCards);
 const userInfo = new UserInfo({ nameSelector, aboutSelector });
 const profileCheck = new FormValidator(config, profilePopup);
@@ -46,11 +51,6 @@ const openImagePopup = (data) => {
   popupWithImage.open(data)
 }
 popupWithImage.setEventListeners();
-
-function createCard(data) {
-  const card = new Card(data, '.place__card', openImagePopup);
-  return card.generateCard();
-}
 
 const handleFormSubmitCard = ({ place, url }) => {
   api.postNewCard({ name: place, link: url })

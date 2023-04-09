@@ -1,7 +1,6 @@
 export default class Card {
   constructor(data, templateSelector, openImagePopup) {
-    this._newPlace = data.name;
-    this._newSrc = data.link;
+    this._data = data;
     this._templateSelector = templateSelector;
     this._openImagePopup = openImagePopup;
   }
@@ -9,9 +8,11 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._placePicture = this._element.querySelector('.place__picture');
-    this._placePicture.src = this._newSrc;
-    this._placePicture.alt = this._newPlace;
-    this._element.querySelector('.place__text').textContent = this._newPlace;
+    this._placePicture.src = this._data.link;
+    this._placePicture.alt = this._data.name;
+    this._element.querySelector('.place__text').textContent = this._data.name;
+    this._likeCounter = this._element.querySelector('.place__like-counter');
+    this._likeCounter.textContent = this._data.likes.length;
     this._setEventListeners();
     return this._element;
   }
@@ -44,6 +45,14 @@ export default class Card {
   }
 
   _openCardView() {
-    this._openImagePopup({ name: this._newPlace, link: this._newSrc });
+    this._openImagePopup({ name: this._data.name, link: this._data.link });
   }
+
+  addLike() {
+    this._likeButton.classList.add('place__like-button_active');
+  }
+
+  // deleteLike() {
+  //   this._likeButton.classList.remove('place__like-button_active');
+  // }
 }
