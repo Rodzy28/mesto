@@ -12,6 +12,7 @@ export const config = {
 export const profilePopup = document.querySelector('.popup_type_profile');
 export const cardPopup = document.querySelector('.popup_type_card');
 export const imagePopup = document.querySelector('.popup_type_image');
+export const popupDelete = document.querySelector('.popup_type_confirm');
 
 // Инпуты попап профиля
 export const nameInput = document.querySelector('.popup__input_type_name');

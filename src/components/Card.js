@@ -1,10 +1,13 @@
 export default class Card {
-  constructor(data, userID, templateSelector, openImagePopup, { handleAddLike, handleRemoveLike }) {
+  constructor(data, userID, templateSelector, openImagePopup,
+    { handleAddLike, handleRemoveLike, handleTrashButton })
+  {
     this._data = data;
     this._templateSelector = templateSelector;
     this._openImagePopup = openImagePopup;
     this._handleAddLike = handleAddLike;
     this._handleRemoveLike = handleRemoveLike;
+    this._handleTrashButton = handleTrashButton;
     this._userID = userID;
   }
 
@@ -14,11 +17,13 @@ export default class Card {
     this._placePicture.src = this._data.link;
     this._placePicture.alt = this._data.name;
     this._likeButton = this._element.querySelector('.place__like-button');
+    this._trashButton = this._element.querySelector('.place__trash-button');
     this._element.querySelector('.place__text').textContent = this._data.name;
     this._likeCounter = this._element.querySelector('.place__like-counter');
     this._likeCounter.textContent = this._data.likes.length;
     this._setEventListeners();
-    this._renderMyLike();
+    this._renderMyLikes();
+    this._renderDeleteButton();
     return this._element;
   }
 
@@ -29,8 +34,8 @@ export default class Card {
         : this._handleAddLike();
     });
 
-    this._element.querySelector('.place__trash-button').addEventListener('click', () => {
-      this._handleButtonTrash();
+    this._trashButton.addEventListener('click', () => {
+      this._handleTrashButton();
     });
 
     this._placePicture.addEventListener('click', () => {
@@ -43,7 +48,7 @@ export default class Card {
     return cardElement;
   }
 
-  _handleButtonTrash() {
+  deleteCard() {
     this._element.remove();
     this._element = null;
   }
@@ -60,12 +65,19 @@ export default class Card {
     this._likeButton.classList.remove('place__like-button_active');
   }
 
-  _renderMyLike() {
+  _renderMyLikes() {
     this._data.likes.forEach((user) => {
       if (user._id === this._userID) {
         this.addLike();
       }
     });
+  }
+
+  _renderDeleteButton() {
+    if (this._data.owner._id !== this._userID) {
+      this._trashButton.remove();
+      this._trashButton = null;
+    }
   }
 
   likesCounter(res) {

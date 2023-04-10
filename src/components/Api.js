@@ -37,7 +37,10 @@ export default class Api {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
+      })
     }).then(this._handlerServerResponse);
   }
 
@@ -50,6 +53,13 @@ export default class Api {
 
   deleteLike(id) {
     return fetch(`${this._url}/cards/${id}/likes`, {
+      method: 'DELETE',
+      headers: this._headers,
+    }).then(this._handlerServerResponse);
+  }
+
+  deleteCard(id) {
+    return fetch(`${this._url}/cards/${id}`, {
       method: 'DELETE',
       headers: this._headers,
     }).then(this._handlerServerResponse);

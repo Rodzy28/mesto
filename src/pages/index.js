@@ -2,7 +2,7 @@ import './index.css';
 import Section from '../components/Section.js';
 import {
   config, profilePopup,
-  cardPopup, imagePopup,
+  cardPopup, imagePopup, popupDelete,
   btnEdit, btnAddCard,
   nameSelector, aboutSelector,
   nameInput, jobInputSelector, listCards
@@ -10,7 +10,8 @@ import {
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from '../components/PopupWithForm.js'
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
@@ -53,6 +54,9 @@ const createCard = (data) => {
           }).catch((err) => {
             console.log(err);
           });
+      },
+      handleTrashButton: () => {
+        popupWithConfirm.open();
       }
     });
   return card.generateCard();
@@ -73,7 +77,7 @@ const openImagePopup = (data) => {
 popupWithImage.setEventListeners();
 
 const handleFormSubmitCard = ({ place, url }) => {
-  api.postNewCard({ name: place, link: url })
+  return api.postNewCard({ name: place, link: url })
     .then((data) => {
       return cardRender.addItem(createCard(data));
     }).catch((err) => {
@@ -82,12 +86,21 @@ const handleFormSubmitCard = ({ place, url }) => {
 }
 
 const handleFormSubmitProfile = ({ name, job }) => {
-  api.setUserInfo({ name: name, about: job })
+  return api.setUserInfo({ name: name, about: job })
     .then((data) => {
       userInfo.setUserInfo(data);
     }).catch((err) => {
       console.log(err);
-    });;
+    });
+}
+
+const handleFormSubmitDelete = (id) => {
+  return api.deleteCard(id)
+    .then(() => {
+      card.deleteCard();
+    }).catch((err) => {
+      console.log(err);
+    });
 }
 
 const popupAddNewProfile = new PopupWithForm(profilePopup, handleFormSubmitProfile);
@@ -95,6 +108,9 @@ popupAddNewProfile.setEventListeners();
 
 const popupAddNewCard = new PopupWithForm(cardPopup, handleFormSubmitCard);
 popupAddNewCard.setEventListeners();
+
+const popupWithConfirm = new PopupWithConfirm(popupDelete, handleFormSubmitDelete);
+popupWithConfirm.setEventListeners();
 
 // Открывашки попапов
 btnEdit.addEventListener('click', () => {
