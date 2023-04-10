@@ -25,16 +25,36 @@ const api = new Api({
 });
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then(([ userData, cards ]) => {
+  .then(([userData, cards]) => {
     userID = userData._id;
     cardRender.renderCardsFromServer(cards);
     userInfo.setUserInfo(userData);
-}).catch((err) => {
-  console.log(err);
-});
+  }).catch((err) => {
+    console.log(err);
+  });
 
 const createCard = (data) => {
-  const card = new Card(data, '.place__card', openImagePopup);
+  const card = new Card(data, userID, '.place__card', openImagePopup,
+    {
+      handleAddLike: () => {
+        return api.addLike(data._id)
+          .then((res) => {
+            card.likesCounter(res);
+            card.addLike();
+          }).catch((err) => {
+            console.log(err);
+          });
+      },
+      handleRemoveLike: () => {
+        return api.deleteLike(data._id)
+          .then((res) => {
+            card.likesCounter(res);
+            card.removeLike();
+          }).catch((err) => {
+            console.log(err);
+          });
+      }
+    });
   return card.generateCard();
 };
 
@@ -63,11 +83,11 @@ const handleFormSubmitCard = ({ place, url }) => {
 
 const handleFormSubmitProfile = ({ name, job }) => {
   api.setUserInfo({ name: name, about: job })
-  .then((data) => {
-    userInfo.setUserInfo(data);
-  }).catch((err) => {
-    console.log(err);
-  });;
+    .then((data) => {
+      userInfo.setUserInfo(data);
+    }).catch((err) => {
+      console.log(err);
+    });;
 }
 
 const popupAddNewProfile = new PopupWithForm(profilePopup, handleFormSubmitProfile);
