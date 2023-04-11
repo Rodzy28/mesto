@@ -56,7 +56,7 @@ const createCard = (data) => {
           });
       },
       handleTrashButton: () => {
-        popupWithConfirm.open();
+        popupWithConfirm.open(card);
       }
     });
   return card.generateCard();
@@ -94,10 +94,11 @@ const handleFormSubmitProfile = ({ name, job }) => {
     });
 }
 
-const handleFormSubmitDelete = (id) => {
-  return api.deleteCard(id)
+const handleFormSubmitDelete = (card) => {
+  return api.deleteCard(card._data._id)
     .then(() => {
       card.deleteCard();
+      popupWithConfirm.close();
     }).catch((err) => {
       console.log(err);
     });
