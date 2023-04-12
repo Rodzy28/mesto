@@ -4,7 +4,7 @@ import {
   config, profilePopup,
   cardPopup, imagePopup, popupDelete,
   btnEdit, btnAddCard,
-  nameSelector, aboutSelector,
+  nameSelector, aboutSelector, avatarSelector,
   nameInput, jobInputSelector, listCards
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
@@ -63,7 +63,7 @@ const createCard = (data) => {
 };
 
 const cardRender = new Section({ renderer: createCard }, listCards);
-const userInfo = new UserInfo({ nameSelector, aboutSelector });
+const userInfo = new UserInfo({ nameSelector, aboutSelector, avatarSelector });
 const profileCheck = new FormValidator(config, profilePopup);
 const cardCheck = new FormValidator(config, cardPopup);
 

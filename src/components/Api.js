@@ -16,7 +16,7 @@ export default class Api {
   }
 
   getUserInfo() {
-    return fetch('https://nomoreparties.co/v1/cohort-63/users/me', {
+    return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: this._headers,
     }).then(this._handlerServerResponse);
