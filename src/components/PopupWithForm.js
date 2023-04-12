@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._popup.querySelector('.popup__form');
     this._inputList = this._form.querySelectorAll('.popup__input');
+    this._btnSubmit = this._form.querySelector('.popup__save-button');
   }
 
   _getInputValues() {
@@ -20,6 +21,12 @@ export default class PopupWithForm extends Popup {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
     });
+  }
+
+  handleBtnSubmit(isSave) {
+    isSave
+    ? this._btnSubmit.textContent = 'Сохранение...'
+    : this._btnSubmit.textContent = 'Сохранить';
   }
 
   close() {

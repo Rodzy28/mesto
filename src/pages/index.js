@@ -89,6 +89,7 @@ const openImagePopup = (data) => {
 popupWithImage.setEventListeners();
 
 const handleFormSubmitCard = ({ place, url }) => {
+  popupAddNewCard.handleBtnSubmit(true);
   return api.postNewCard({ name: place, link: url })
     .then((data) => {
       cardRender.addItem(createCard(data));
@@ -99,6 +100,7 @@ const handleFormSubmitCard = ({ place, url }) => {
 }
 
 const handleFormSubmitProfile = ({ name, job }) => {
+  popupAddNewProfile.handleBtnSubmit(true);
   return api.setUserInfo({ name: name, about: job })
     .then((data) => {
       userInfo.setUserInfo(data);
@@ -109,6 +111,7 @@ const handleFormSubmitProfile = ({ name, job }) => {
 }
 
 const handleFormSubmitAvatar = ({ avatar }) => {
+  popupAddNewAvatar.handleBtnSubmit(true);
   return api.setAvatar({ avatar: avatar })
     .then((data) => {
       userInfo.setUserAvatar(data);
@@ -124,11 +127,11 @@ popupAddNewProfile.setEventListeners();
 const popupAddNewCard = new PopupWithForm(cardPopup, handleFormSubmitCard);
 popupAddNewCard.setEventListeners();
 
-const popupWithConfirm = new PopupWithConfirm(popupDelete);
-popupWithConfirm.setEventListeners();
-
 const popupAddNewAvatar = new PopupWithForm(avatarPopup, handleFormSubmitAvatar);
 popupAddNewAvatar.setEventListeners();
+
+const popupWithConfirm = new PopupWithConfirm(popupDelete);
+popupWithConfirm.setEventListeners();
 
 btnEdit.addEventListener('click', () => {
   profileCheck.resetErrorMessage();
@@ -136,17 +139,20 @@ btnEdit.addEventListener('click', () => {
   const { name, job } = userInfo.getUserInfo();
   nameInput.value = name;
   jobInputSelector.value = job;
+  popupAddNewProfile.handleBtnSubmit(false);
   popupAddNewProfile.open();
 });
 
 btnAddCard.addEventListener('click', () => {
   cardCheck.resetErrorMessage();
   cardCheck.disableSubmitButton();
+  popupAddNewCard.handleBtnSubmit(false);
   popupAddNewCard.open();
 });
 
 btnEditAvatar.addEventListener('click', () => {
   avatarCheck.resetErrorMessage();
   avatarCheck.disableSubmitButton();
+  popupAddNewAvatar.handleBtnSubmit(false);
   popupAddNewAvatar.open();
 })
