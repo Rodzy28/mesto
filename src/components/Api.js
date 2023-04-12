@@ -65,6 +65,15 @@ export default class Api {
     }).then(this._handlerServerResponse);
   }
 
+  setAvatar(data) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.avatar
+      })
+    }).then(this._handlerServerResponse);
+  }
 }
 
 
