@@ -6,14 +6,6 @@ export default class PopupWithConfirm extends Popup {
     this._form = this._popup.querySelector('.popup__form');
   }
 
-  open() {
-    super.open();
-  }
-
-  close() {
-    super.close();
-  }
-
   transferCardId(cardId) {
     this._cardId = cardId;
   }

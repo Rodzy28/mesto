@@ -15,18 +15,24 @@ export default class PopupWithForm extends Popup {
     return formValues;
   }
 
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+      input.value = data[input.name];
+    });
+  }
+
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit(this._getInputValues());
+      const initialText = this._btnSubmit.textContent;
+      this._btnSubmit.textContent = 'Сохранение...';
+      this._handleFormSubmit(this._getInputValues())
+        .then(() => this.close())
+        .finally(() => {
+          this._btnSubmit.textContent = initialText;
+        });
     });
-  }
-
-  handleBtnSubmit(isSave) {
-    isSave
-    ? this._btnSubmit.textContent = 'Сохранение...'
-    : this._btnSubmit.textContent = 'Сохранить';
   }
 
   close() {

@@ -15,10 +15,6 @@ export const imagePopup = document.querySelector('.popup_type_image');
 export const popupDelete = document.querySelector('.popup_type_confirm');
 export const avatarPopup = document.querySelector('.popup_type_avatar');
 
-// Инпуты попап профиля
-export const nameInput = document.querySelector('.popup__input_type_name');
-export const jobInputSelector = document.querySelector('.popup__input_type_job');
-
 // Кнопки открытия попапов
 export const btnEdit = document.querySelector('.profile__edit-button');
 export const btnAddCard = document.querySelector('.profile__add-button');

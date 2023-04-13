@@ -5,7 +5,7 @@ import {
   cardPopup, imagePopup, popupDelete,
   btnEdit, btnAddCard, btnEditAvatar,
   nameSelector, aboutSelector, avatarSelector,
-  nameInput, jobInputSelector, listCards
+  listCards
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -89,33 +89,27 @@ const openImagePopup = (data) => {
 popupWithImage.setEventListeners();
 
 const handleFormSubmitCard = ({ place, url }) => {
-  popupAddNewCard.handleBtnSubmit(true);
   return api.postNewCard({ name: place, link: url })
     .then((data) => {
       cardRender.addItem(createCard(data));
-      popupAddNewCard.close();
     }).catch((err) => {
       console.log(err);
     });
 }
 
 const handleFormSubmitProfile = ({ name, job }) => {
-  popupAddNewProfile.handleBtnSubmit(true);
   return api.setUserInfo({ name: name, about: job })
     .then((data) => {
       userInfo.setUserInfo(data);
-      popupAddNewProfile.close();
     }).catch((err) => {
       console.log(err);
     });
 }
 
 const handleFormSubmitAvatar = ({ avatar }) => {
-  popupAddNewAvatar.handleBtnSubmit(true);
   return api.setAvatar({ avatar: avatar })
     .then((data) => {
       userInfo.setUserAvatar(data);
-      popupAddNewAvatar.close();
     }).catch((err) => {
       console.log(err);
     });
@@ -136,23 +130,18 @@ popupWithConfirm.setEventListeners();
 btnEdit.addEventListener('click', () => {
   profileCheck.resetErrorMessage();
   profileCheck.disableSubmitButton();
-  const { name, job } = userInfo.getUserInfo();
-  nameInput.value = name;
-  jobInputSelector.value = job;
-  popupAddNewProfile.handleBtnSubmit(false);
+  popupAddNewProfile.setInputValues(userInfo.getUserInfo());
   popupAddNewProfile.open();
 });
 
 btnAddCard.addEventListener('click', () => {
   cardCheck.resetErrorMessage();
   cardCheck.disableSubmitButton();
-  popupAddNewCard.handleBtnSubmit(false);
   popupAddNewCard.open();
 });
 
 btnEditAvatar.addEventListener('click', () => {
   avatarCheck.resetErrorMessage();
   avatarCheck.disableSubmitButton();
-  popupAddNewAvatar.handleBtnSubmit(false);
   popupAddNewAvatar.open();
 })
